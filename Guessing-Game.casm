@@ -1,10 +1,16 @@
 Function: main/0
-Constants: None, 1, 100, 2, 3, "BIENVENIDO A LAS ADIVINANZAS", " ", "NIVELES:", "1. Facil (10 vidas)", "2. Intermedio (5 vidas)", "3. Dificil (1 vida)", "Ingrese su opcion: ", "Ya tengo un numero del 1 al 100, a que no la adivinas: ", "INCORRECTO", "CORRECTO. ADIVINASTE EL NUMERO", "GAME OVER", "Has agotado tus vidas", "FELICITACIONES, HAS GANADO EL JUEGO", "1. Volver a jugar", "2. Salir", 46, "COMANDO INVALIDO", 10, 5, 0, "Tienes", "vidas", "HASTA PRONTO!"
-Locals: correcto, usuario, repetir, nivel, vidas
-Globals: print, input, int
-BEGIN               
-                    ;PROFE, CONSIDERO EL NUMERO 46 COMO EL ALEATORIO/CORRECTO Y ESTÁ EN LAS CONSTANTES. GRACIAS!
 
+;Consideramos el 46 como el correcto. Para otro número solo cambialo aquí en Constants
+Constants: None, 1, 100, 2, 3, "BIENVENIDO A LAS ADIVINANZAS", " ", "NIVELES:", "1. Facil (10 vidas)", "2. Intermedio (5 vidas)", 
+            "3. Dificil (1 vida)", "Ingrese su opcion: ", "Ya tengo un numero del 1 al 100, a que no la adivinas: ", "INCORRECTO",
+            "CORRECTO. ADIVINASTE EL NUMERO", "GAME OVER", "Has agotado tus vidas", "FELICITACIONES, HAS GANADO EL JUEGO",
+            "1. Volver a jugar", "2. Salir", 46, "COMANDO INVALIDO", 10, 5, 0, "Tienes", "vidas", "HASTA PRONTO!", "El numero correcto era el"
+
+Locals: correcto, usuario, repetir, nivel, vidas
+
+Globals: print, input, int
+
+BEGIN               
                     LOAD_GLOBAL             0  ;  Damos la bienvenida
                     LOAD_CONST              6
                     CALL_FUNCTION           1
@@ -141,6 +147,11 @@ BEGIN
                     LOAD_GLOBAL             0
                     LOAD_CONST              16
                     CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              28
+                    LOAD_FAST               0
+                    CALL_FUNCTION           2
 
                     JUMP_ABSOLUTE           again
 
