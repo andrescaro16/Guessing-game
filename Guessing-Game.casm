@@ -1,0 +1,216 @@
+Function: main/0
+Constants: None, 1, 100, 2, 3, "BIENVENIDO A LAS ADIVINANZAS", " ", "NIVELES:", "1. Facil (10 vidas)", "2. Intermedio (5 vidas)", "3. Dificil (1 vida)", "Ingrese su opcion: ", "Ya tengo un numero del 1 al 100, a que no la adivinas: ", "INCORRECTO", "CORRECTO. ADIVINASTE EL NUMERO", "GAME OVER", "Has agotado tus vidas", "FELICITACIONES, HAS GANADO EL JUEGO", "1. Volver a jugar", "2. Salir", 46, "COMANDO INVALIDO", 10, 5, 0, "Tienes", "vidas", "HASTA PRONTO!"
+Locals: correcto, usuario, repetir, nivel, vidas
+Globals: print, input, int
+BEGIN               
+                    ;PROFE, CONSIDERO EL NUMERO 46 COMO EL ALEATORIO/CORRECTO Y ESTÁ EN LAS CONSTANTES. GRACIAS!
+
+                    LOAD_GLOBAL             0  ;  Damos la bienvenida
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              5
+                    CALL_FUNCTION           1
+                    
+
+        inicio:     LOAD_GLOBAL             0  ;  Niveles
+                    LOAD_CONST              7
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              8
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              9
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              10
+                    CALL_FUNCTION           1
+                    JUMP_ABSOLUTE           niveles
+
+
+
+        comInval:   LOAD_GLOBAL             0  ;  Aqui entramos solo en caso de no seleccionar los niveles adecuados (1, 2 o 3)
+                    LOAD_CONST              21
+                    CALL_FUNCTION           1
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+
+
+
+        niveles:    LOAD_GLOBAL             2  ;  Solicitamos el nivel
+                    LOAD_GLOBAL             1
+                    LOAD_CONST              11
+                    CALL_FUNCTION           1
+                    CALL_FUNCTION           1
+                    STORE_FAST              3
+
+
+
+        nivelFacil: LOAD_FAST               3  ;  Si elige el nivel fácil tendra 10 vidas
+                    LOAD_CONST              1
+                    COMPARE_OP              2
+                    POP_JUMP_IF_FALSE       nivelInter
+
+                    LOAD_CONST              22
+                    STORE_FAST              4
+
+                    JUMP_ABSOLUTE           juego
+
+
+
+        nivelInter: LOAD_FAST               3
+                    LOAD_CONST              3
+                    COMPARE_OP              2
+                    POP_JUMP_IF_FALSE       nivelDif
+
+                    LOAD_CONST              23
+                    STORE_FAST              4
+
+                    JUMP_ABSOLUTE           juego
+
+
+
+        nivelDif:   LOAD_FAST               3
+                    LOAD_CONST              4
+                    COMPARE_OP              2
+                    POP_JUMP_IF_FALSE       comInval
+
+                    LOAD_CONST              1
+                    STORE_FAST              4
+
+
+
+        juego:      LOAD_GLOBAL             0  ;  Comienza el juego
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+
+                    LOAD_CONST              20  ;  Hallamos el número aleatorio(En este caso cargamos 46 de las constantes)
+                    STORE_FAST              0
+
+
+
+        ciclo:      LOAD_FAST               4
+                    LOAD_CONST              24
+                    COMPARE_OP              2
+                    POP_JUMP_IF_TRUE        perdedor
+        
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              25
+                    LOAD_FAST               4
+                    LOAD_CONST              26
+                    CALL_FUNCTION           3
+
+                    LOAD_GLOBAL             2  ;  Jugador intenta adivinar
+                    LOAD_GLOBAL             1
+                    LOAD_CONST              12
+                    CALL_FUNCTION           1
+                    CALL_FUNCTION           1
+                    STORE_FAST              1
+
+                    LOAD_FAST               0  ;  Condicional si adivina o no
+                    LOAD_FAST               1
+                    COMPARE_OP              3
+                    POP_JUMP_IF_FALSE       ganador
+
+                    LOAD_FAST               4  ;  Le restamos 1 a las vidas
+                    LOAD_CONST              1
+                    BINARY_SUBTRACT         
+                    STORE_FAST              4
+
+                    LOAD_GLOBAL             0  ;  Le decimos que está incorrecto
+                    LOAD_CONST              13
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+
+                    JUMP_ABSOLUTE           ciclo
+
+                    
+
+        perdedor:   LOAD_GLOBAL             0
+                    LOAD_CONST              15
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              16
+                    CALL_FUNCTION           1
+
+                    JUMP_ABSOLUTE           again
+
+
+
+        ganador:    
+                    LOAD_GLOBAL             0  ;  Espacio
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0  ;  Aviso de que ganó
+                    LOAD_CONST              14
+                    LOAD_FAST               0
+                    CALL_FUNCTION           2
+
+                    LOAD_GLOBAL             0  ;  Felicitaciones
+                    LOAD_CONST              17
+                    CALL_FUNCTION           1
+
+                    JUMP_ABSOLUTE           again
+
+
+        again:      LOAD_GLOBAL             0  ;  Espacio
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0  ;  Avisos de si desea volver a jugar
+                    LOAD_CONST              18
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              19
+                    CALL_FUNCTION           1
+
+                    LOAD_GLOBAL             2
+                    LOAD_GLOBAL             1
+                    LOAD_CONST              11
+                    CALL_FUNCTION           1
+                    CALL_FUNCTION           1
+                    STORE_FAST              2
+
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+
+                    LOAD_FAST               2  ;  Si desea volver a jugar se repite, sino continúa
+                    LOAD_CONST              1
+                    COMPARE_OP              2
+                    POP_JUMP_IF_TRUE        inicio
+
+                    LOAD_FAST               2
+                    LOAD_CONST              3
+                    COMPARE_OP              2
+                    POP_JUMP_IF_TRUE        cierre
+
+                    LOAD_GLOBAL             0  ;  Aqui entramos solo en caso de no tomar alguna de las opciones correctas (1 o 2)
+                    LOAD_CONST              21
+                    CALL_FUNCTION           1
+                    LOAD_GLOBAL             0
+                    LOAD_CONST              6
+                    CALL_FUNCTION           1
+                    JUMP_ABSOLUTE           again
+
+
+        cierre:     LOAD_GLOBAL             0
+                    LOAD_CONST              27
+                    CALL_FUNCTION           1
+
+                    POP_TOP
+                    LOAD_CONST              0
+                    RETURN_VALUE
+
+END
